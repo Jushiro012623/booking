@@ -1,4 +1,4 @@
-import { useAuthProvider } from '@/context/AuthenticationProvider';
+import { useAuthProvider } from '../context/AuthenticationProvider';
 import api from '../api/api';
 import React from 'react'
 const useDataFetcher = (route : string | null , params : any | null = null) => {
@@ -8,9 +8,9 @@ const useDataFetcher = (route : string | null , params : any | null = null) => {
     const { logout, token } = useAuthProvider()
     React.useEffect(() => {
         api.get({route, params, token})
-        .then((response) => {
+        .then((response : any) => {
             response && setData(response.data.data);
-        }).catch((error) => {
+        }).catch((error : any) => {
             setError(error)
             if(error?.status == 401){
                 logout()                 
