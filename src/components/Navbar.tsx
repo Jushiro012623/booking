@@ -1,4 +1,3 @@
-import React from "react";
 import Typography from "./ui/Typography";
 export default function Navbar() {
   return (
