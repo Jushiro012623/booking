@@ -23,10 +23,10 @@ interface MultiStepper {
 export const MultiStepper = React.createContext<MultiStepper | undefined>(undefined);
 export default function MultiStepperProvider({children}:MultiStepperProvider) {
     const stepDetails = [
-        { id: 1, icon: <IoBoat />, details: "Select Schedule" },
-        { id: 2, icon: <IoBoat />, details: "Fillup Details" },
-        { id: 3, icon: <IoBoat />, details: "Select Flights" },
-        { id: 4, icon: <IoBoat />, details: "Confirm" },
+        { id: 1, icon: <IoBoat />, details: "Fillup Details" },
+        { id: 2, icon: <IoBoat />, details: "Search Flights" },
+        { id: 3, icon: <IoBoat />, details: "Confirm" },
+        // { id: 4, icon: <IoBoat />, details: "Confirm" },
     ];
     const [isDisable, setIsDisable] = React.useState(true)
     const { dispatch, state, maxStep } = useStepManager(stepDetails.length)

@@ -3,13 +3,13 @@ import { IoIosArrowDown } from 'react-icons/io';
 
 interface SelectOption{
     label: string;
-    value: any;
+    text: any;
     data: any;
     name: any;
     handleChange: (prevState: any) => void;
     className?: string
 }
-export const SelectOption = ({ label, value, data, name, handleChange, className}:SelectOption) => {
+export const SelectOption = ({ text, label, data, name, handleChange, className}:SelectOption) => {
     return (
       <div className={`relative ${className}`}>
         <Typography variant="small" className="pl-1">
@@ -22,7 +22,7 @@ export const SelectOption = ({ label, value, data, name, handleChange, className
           onChange={handleChange}
         >
           <option className="text-xs capitalize pointer-events-none">
-            {value?.discount || 'Select Option'}
+            {text || 'Select Option'}
           </option>
           {data?.map((data : any, index : number) => (
             <option

@@ -18,7 +18,7 @@ const StepTracker = ({ state, stepDetails }:StepTracker) => {
         }
     }
     return (
-        <div className='rounded-[40px] border flex  px-4 py-4  select-none shadow-md'>
+        <div className='rounded-[40px] border flex  px-4 py-4 gap-16 select-none shadow-md'>
             {stepDetails.map((detail : any)=>(
                 <div key={detail.id} className='relative step-detail flex items-center mr-16 gap-x-4'>
                     <div className={`step-icon flex items-center justify-center rounded-full transition-colors duration-500 ${stateClass(state, detail)} border w-11  h-11 p-3`}>

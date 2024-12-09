@@ -7,7 +7,7 @@ const variants = {
   danger: 'bg-red-500 text-white border-transparent hover:bg-red-600',
   light: 'bg-white border text-slate-900 hover:bg-gray-100',
   dark: 'bg-slate-700 text-white border-transparent hover:bg-slate-800',
-  border: 'bg-border border text-slate-900 hover:bg-gray-900 hover:text-white',
+  border: 'bg-border border text-slate-900 hover:bg-gray-200 hover:text-slate-900',
   plain: ''
 };
 
@@ -16,6 +16,7 @@ const sizes = {
   small2: 'py-3 px-4 text-xs',
   medium: 'py-3 px-4 text-sm',
   large: 'py-4 px-5 text-lg',
+  custom: ''
 };
 interface ButtonProps{
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
