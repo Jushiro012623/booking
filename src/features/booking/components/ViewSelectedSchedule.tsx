@@ -1,4 +1,3 @@
-import React from 'react'
 import { useMultiForm } from '../../../context/MultiStepperProvider'
 import Typography from '../../../components/ui/Typography'
 import { IoIosArrowRoundForward } from 'react-icons/io'

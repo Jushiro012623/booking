@@ -1,9 +1,6 @@
 import React from 'react'
 import Typography from '../../../components/ui/Typography'
 import { useMultiForm } from '../../../context/MultiStepperProvider'
-import { IoIosArrowRoundForward } from 'react-icons/io'
-import { mock_schedule, vessels } from '../../../mock/Data'
-import { isSelected } from '../../../utils/MultiForm'
 import { SelectSchedule } from './SelectSchedule'
 
 export const SecondStep = () => {
