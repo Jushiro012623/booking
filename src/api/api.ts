@@ -44,16 +44,16 @@ api.interceptors.response.use(
       console.log(access_token);
 
       localStorage.setItem("token", access_token);
-      customFetch.defaults.headers.common[
+      api.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${access_token}`;
-      return customFetch(originalRequest);
+      return api(originalRequest);
     }
     return Promise.reject(error);
   }
 );
 
-export async function get({route, params, token}) {
+export async function get({route, params, token} : any) {
 //   const token = localStorage.getItem("_accessToken");
   let response = null;
 
@@ -71,7 +71,7 @@ export async function get({route, params, token}) {
   return response;
 }
 
-export async function post({route, body, token}) {
+export async function post({route, body, token} : any) {
 //   const token = localStorage.getItem("_accessToken");
   let response = null;
 
@@ -88,7 +88,7 @@ export async function post({route, body, token}) {
   return response;
 }
 
-export async function put({route, body}) {
+export async function put({route, body} : any) {
   const token = localStorage.getItem("_accessToken");
   let response = null;
   response = await axios.put(BASE_URL + route, body, {
@@ -97,7 +97,7 @@ export async function put({route, body}) {
   return response;
 }
 
-export async function destroy({route, params}) {
+export async function destroy({route, params} : any) {
   const token = localStorage.getItem("_accessToken");
   let response = null;
   response = await axios.delete(BASE_URL + route, {
@@ -107,7 +107,7 @@ export async function destroy({route, params}) {
   return response;
 }
 
-export async function upload({route, body}) {
+export async function upload({route, body} : any) {
   const token = localStorage.getItem("_accessToken");
   let response = null;
 
@@ -121,7 +121,7 @@ export async function upload({route, body}) {
   return response;
 }
 
-export async function download({route, params}) {
+export async function download({route, params} : any) {
   const token = localStorage.getItem("_accessToken");
   let response = null;
 

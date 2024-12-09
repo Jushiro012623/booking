@@ -1,5 +1,5 @@
 import { useAuthProvider } from '../context/AuthenticationProvider';
-import api from '../api/api';
+import api from '../api/api'
 import React from 'react'
 const useDataFetcher = (route : string | null , params : any | null = null) => {
     const [data, setData] = React.useState(null);
