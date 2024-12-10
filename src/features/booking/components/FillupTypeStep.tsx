@@ -20,7 +20,6 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
         })) 
         setTypeInitData(( prev : any )=>({...prev, ...preSelectType}));
     }
-    console.log(value);
     const handleWeight = (event : any, ) => {
         const [preSelectWeight] = mock_weights
         .filter((weight : any) => weight.id == event.target.value)

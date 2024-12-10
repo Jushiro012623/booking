@@ -64,7 +64,20 @@ const Booking = () => {
     },[value])
     const memoSchedule = React.useMemo(() => value?.data?.type_id, [value?.data?.type_id]);
     React.useEffect(() => {
-        setValue((prev : any) => ({...prev, data: {...prev?.data, schedule_id: null} } ))
+        setValue((prev : any) => ({...prev, 
+            data: {...prev?.data, 
+                schedule_id: null,
+                weight_id: null,
+                plate_number: null,
+                item_quantity: null,
+                passenger_quantity: null,
+                description: null,
+                additional: null,
+                vehicle_type: null,
+                discount_id: null,
+            },
+            weight: null, discount:null
+     } ))
     }, [memoSchedule])
     useDocumentTitle(`Booking Process | ${DocumentTitleStepNumber()}`);
     return (
