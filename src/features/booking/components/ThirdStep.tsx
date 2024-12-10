@@ -16,6 +16,8 @@ export const ThirdStep = () => {
                 </div>
                 <div className='w-full mt-5'>    
                     <Typography variant="h6" className='text-cerulean-blue-500 border-b-2 border-dotted border-slate-200 pb-2 font-semibold'>Travel Details</Typography>
+                    <Typography variant="body2" className='mt-2 flex justify-between capitalize'><span className='font-medium'>Shipment Type</span> <span>{value.shipment_type}</span></Typography>
+                    <Typography variant="body2" className='mt-2 flex justify-between capitalize'><span className='font-medium'>Vessel</span> <span>{value.fare.vessel}</span></Typography>
                     <Typography variant="body2" className='mt-2 flex justify-between capitalize'><span className='font-medium'>Transportation Type</span> <span>{value.route.transportation_type}</span></Typography>
                     <Typography variant="body2" className='mt-2 flex justify-between'><span className='font-medium'>Origin</span> <span>{value.route.origin}</span></Typography>
                     <Typography variant="body2" className='mt-2 flex justify-between'><span className='font-medium'>Destination</span> <span>{value.route.destination}</span></Typography>
