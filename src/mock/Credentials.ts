@@ -14,5 +14,13 @@ export const cred = [
         email: 'user@gmail.com',
         role: 'user',
         password: '456'
+    },
+    {
+        id: 3,
+        name: 'Ivan Martin',
+        username: 'akosinella29',
+        email: 'akosinella',
+        role: 'user',
+        password: '123'
     }
 ]
