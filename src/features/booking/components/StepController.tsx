@@ -11,6 +11,7 @@ export default function StepController({loading}:MultiStepper) {
     const {setToast, setToastInfo, toast} = useToast()
     const {state, dispatch, maxStep, isDisable} = useMultiForm()
     const handleDispatch = () => {
+        
         if (!isDisable){
             if (state.step !== maxStep) {
                 dispatch({ type: "NEXT" });
@@ -29,11 +30,11 @@ export default function StepController({loading}:MultiStepper) {
         }else{
             setToast(true)
         }
-        
         setToastInfo({title: 'error', message: 'All Fields are required'})
+        
     }
     return (
-        <div className={`step-buttons flex w-full  mt-auto py-8 ${state.step === 1 ? 'justify-end' : 'justify-between'}`}>
+        <div className={` step-buttons flex w-full  mt-auto py-8 ${state.step === 1 ? 'justify-end' : 'justify-between'}`}>
             <Button 
                 className={`flex items-center gap-2 justify-center min-w-20 ${state.step === 1 ? 'hidden' : ''} `} 
                 onClick={() => {dispatch({ type: "BACK" })} } 
@@ -43,7 +44,7 @@ export default function StepController({loading}:MultiStepper) {
                 <FaArrowLeftLong />Back
             </Button>
             <Button 
-                className={`flex items-center gap-2 justify-center min-w-20`} 
+                className={`flex items-center gap-2 justify-center min-w-20 ${isDisable ? 'opacity-50 pointer-events-none' : null}`} 
                 type={state.status === 'complete' ? 'submit' : 'button'}
                 onClick={handleDispatch}  
             >

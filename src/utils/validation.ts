@@ -1,28 +1,55 @@
-export const firstStepValition = (value : any) : boolean => {
-    let error : string  | undefined;
-    const name = value?.data?.name
-    const email = value?.data?.email
-    
-    if(name == undefined){
-        error = 'Name is Required';
+export const firstStepValition = (value : any) : any => {
+    const returnValue : any = []
+    const hasRoute = value?.data.route_id
+    const hasName = value?.data?.name
+    const hasEmail = value?.data?.email
+    const hasPersonalInfo = hasName && hasEmail
+    const hasShipmentType = value?.data?.type_id
+    const hasDescription = value?.data?.description
+    const hasItemQuantity = value?.data?.item_quantity
+    const hasItemName = value?.data?.item_name
+    const hasPlateNumber = value?.data?.plate_number
+    const hasWeight = value?.data?.weight
+    const hasVehicleType = value?.data?.vehicle_type
+    const hasDiscount = value?.data?.discount_id
+    const hasPassengerQuantity = value?.data?.passenger_quantity
+    const hasCompletedTypeFillup= () => {
+        switch(value?.data?.type_id){
+            case 1:
+                return hasDiscount &&hasPassengerQuantity
+            case 2:
+                return  hasPlateNumber && hasWeight && hasVehicleType
+            case 3:
+                return hasDescription && hasItemQuantity &&  hasItemName &&  hasWeight
+            default: 
+                return false
+        }
     }
-    if(email?.length === 0){
-        error = 'Name is Required';
+    const canProceed = hasRoute && hasPersonalInfo && hasShipmentType && hasCompletedTypeFillup()
+    if(!hasName){
+        returnValue.inputs = 'Name'
+        returnValue.canProceed = false
+        return returnValue
+        // setIsDisable(true)
     }
-    if(name?.length < 8){
-        error = 'Full Name must be at least 8 characters';
+    if(canProceed){
+        returnValue.inputs = null
+        returnValue.canProceed = false
+        return returnValue
+        // setIsDisable(false)
+    }else{
+        returnValue.inputs = null
+        returnValue.canProceed = true
+        return returnValue
+        // setIsDisable(true)
     }
-    if (email?.length === 0 || email?.length < 15) {
-        error = 'Invalid email address';
+}
+
+export  const secondStepValidation = (value : any) : boolean => {
+    const hasSelectedSchedule = value?.data?.schedule_id !== null || undefined
+    if(hasSelectedSchedule){
+        return false
+    }else{
+        return true
     }
-    if(!email?.endsWith('@gmail.com')){
-        error = 'Email address must end with @gmail.com';
-    }
-    if(!value?.route){
-        error = 'Please select a route';
-    }
-    if(error){
-        return true;
-    }
-    return false;
 }

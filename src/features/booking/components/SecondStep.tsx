@@ -2,16 +2,19 @@ import React from 'react'
 import Typography from '../../../components/ui/Typography'
 import { useMultiForm } from '../../../context/MultiStepperProvider'
 import { SelectSchedule } from './SelectSchedule'
+import { secondStepValidation } from '../../../utils/validation'
 
 export const SecondStep = () => {
     const {value, setIsDisable} = useMultiForm()
     React.useEffect(() => {
-        const hasSelectedSchedule = value?.data?.schedule_id !== null || undefined
-        if(hasSelectedSchedule){
-            setIsDisable(false)
-        }else{
-            setIsDisable(true)
-        }
+        const canProceed = secondStepValidation(value)
+        setIsDisable(canProceed)
+        // const hasSelectedSchedule = value?.data?.schedule_id !== null || undefined
+        // if(hasSelectedSchedule){
+        //     setIsDisable(false)
+        // }else{
+        //     setIsDisable(true)
+        // }
     },[value])
   return (
     <div className='w-full mt-16 mb-10'>

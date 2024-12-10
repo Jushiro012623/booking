@@ -4,6 +4,7 @@ import LabeledInputText from '../../../components/ui/LabeledInputText';
 import { useMultiForm } from '../../../context/MultiStepperProvider';
 import { FillupTypeStep } from './FillupTypeStep';
 import { FillupRoute } from './FillupRoute';
+import { firstStepValition  } from '../../../utils/validation';
 const FirstStep = ({mock_routes}:any) => {
     const { value, setValue, setIsDisable } = useMultiForm();
     const [firstStepInitData, setFirstStepInitData] = React.useState<any>();
@@ -17,34 +18,14 @@ const FirstStep = ({mock_routes}:any) => {
             route:preSelectRoute
         })) 
         setFirstStepInitData(( prev : any )=>({...prev, ...preSelectRoute}));
-        
     }
     const handleInputChange = (e : any, name : any) => {
         setValue((prev : any) => ({...prev, data:{ ...prev?.data, [name]: e.target.value}}));
         setFirstStepInitData((prev : any ) => ({...prev, [name] : e.target.value}))
     }
     React.useEffect(() => {
-        const hasRoute = value?.data.route_id
-        const hasPersonalInfo = value?.data?.name && value?.data?.email
-        const hasShipmentType = value?.data?.type_id
-        const hasCompletedTypeFillup= () => {
-            switch(value?.data?.type_id){
-                case 1:
-                    return value?.data?.discount_id && value?.data?.passenger_quantity
-                case 2:
-                    return value?.data?.plate_number && value?.data?.weight_id &&  value?.data?.vehicle_type
-                case 3:
-                    return value?.data?.description && value?.data?.item_quantity &&  value?.data?.item_name &&  value?.data?.weight_id
-                default: 
-                    return false
-            }
-        }
-        const canProceed = hasRoute && hasPersonalInfo && hasShipmentType && hasCompletedTypeFillup()
-        if(canProceed){
-            setIsDisable(false)
-        }else{
-            setIsDisable(true)
-        }
+        const firstStep = firstStepValition(value)
+        setIsDisable(firstStep.canProceed)
     },[value])
     return (
         <React.Fragment>

@@ -91,7 +91,7 @@ const Booking = () => {
                 {/* _____________________THIRD STEP_____________________ */}
                 {state.step === 3 && <ThirdStep />}
 
-                <StepController loading={submitting}/>
+                {<StepController loading={submitting} />}
             </form>
             {toast && <Toast variant={toastInfo?.title} message={toastInfo?.message}/>}
         </section>
