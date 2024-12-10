@@ -19,13 +19,10 @@ export const Login = () => {
     const handleChange = (field : string, value : string) => {
         setInput((prev : any) => ({ ...prev, [field]: value }));
     };
-    const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleLoginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setLoading(true);
-        // Simulate a network request
-        // setTimeout(() => {
         try {
-            // Validate inputs
+            setLoading(true);
             if (!input.email || !input.password) {
                 throw new Error('All fields are required');
             }
@@ -47,7 +44,6 @@ export const Login = () => {
             setToast(true);
             setLoading(false);
         }
-        // }, 2000); // Simulate 2-second network delay
     };
     if (token) {
         return <Navigate to="/" />;
