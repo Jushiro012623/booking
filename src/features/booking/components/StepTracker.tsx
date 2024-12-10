@@ -1,6 +1,5 @@
 import { FaCheck} from "react-icons/fa6";
 import Typography from '../../../components/ui/Typography';
-import { useMultiForm } from "../../../context/MultiStepperProvider";
 import React from "react";
 
 interface StepTracker{
