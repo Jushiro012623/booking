@@ -48,17 +48,17 @@ const FirstStep = ({mock_routes}:any) => {
     },[value])
     return (
         <React.Fragment>
-            <div className="w-full mt-16 mb-10  p-10borderrounded-lg">
-                <Typography className=" px-1 font-medium">Step 1</Typography>
-                <Typography variant="small" className='px-1'>Please fill up all the necessary information</Typography>
+            <div className="w-full mt-16 mb-10 p-10borderrounded-lg">
+                <Typography variant='h4' className=" font-semibold">Step 1</Typography>
+                <Typography variant="body2" className=''>Please fill up all the necessary information</Typography>
                 {/* ----------------------------ROUTES FIELD---------------------------- */}
                 <FillupRoute initialRouteType={initialRouteType} handleOnRouteChoose={handleOnRouteChoose} firstStepInitData={firstStepInitData}/>
-                <span className='block border-b-2 border-dotted  h-1 mt-7 mx-1' />
+                <span className='block border-b-2 border-dotted  h-1 mt-7' />
                 {/* ------------------------SHIPMENT TYPE FIELD------------------------- */}
                 <FillupTypeStep handleInputChange={handleInputChange}/>
-                <span className='block border-b-2 border-dotted  h-1 mt-7 mx-1' />
+                <span className='block border-b-2 border-dotted  h-1 mt-7' />
                 {/* ------------------------PERSONAL INFO FIELDS------------------------ */}
-                <div className="mt-7 px-1">
+                <div className="mt-7 ">
                     <div className="w-full flex gap-x-5">
                         <LabeledInputText value={value?.data?.name || ''} onChange={(e)=>{handleInputChange(e,'name' )}} className="border-neutral-300" name="name" label="Full Name" placeholder="Doom Bringer"/>
                         <LabeledInputText value={value?.data?.email || ''} onChange={(e)=>{handleInputChange(e,'email')}} className="border-neutral-300" name="email" label="Email Address" placeholder="doom.bringer@gmail.com"/>

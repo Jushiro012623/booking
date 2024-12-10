@@ -16,7 +16,7 @@ export const FillupRoute = ({initialRouteType, handleOnRouteChoose, firstStepIni
   return (
     <React.Fragment>
         <div className={``}>
-            <div className={`w-full flex gap-3 mt-3 px-1`}>
+            <div className={`w-full flex gap-3 mt-4`}>
                 <Button
                     variant="plain"
                     type="button"

@@ -32,7 +32,7 @@ export default function StepController({loading}:MultiStepper) {
     return (
         <div className={`step-buttons flex w-full  mt-auto py-8 ${state.step === 1 ? 'justify-end' : 'justify-between'}`}>
             <Button 
-                className={`flex items-center gap-1 justify-center ${state.step === 1 ? 'hidden' : ''} `} 
+                className={`flex items-center gap-2 justify-center min-w-20 ${state.step === 1 ? 'hidden' : ''} `} 
                 onClick={() => {dispatch({ type: "BACK" })} } 
                 type="button" 
                 variant='light'
@@ -40,7 +40,7 @@ export default function StepController({loading}:MultiStepper) {
                 <FaArrowLeftLong />Back
             </Button>
             <Button 
-                className={`flex items-center gap-1 justify-center`} 
+                className={`flex items-center gap-2 justify-center min-w-20`} 
                 type={state.status === 'complete' ? 'submit' : 'button'}
                 onClick={handleDispatch}  
             >

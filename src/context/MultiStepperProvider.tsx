@@ -34,7 +34,7 @@ export default function MultiStepperProvider({children}:MultiStepperProvider) {
     const [toast, setToast] = React.useState<boolean>(false);
     const [toastInfo, setToastInfo] = React.useState<any>({title: null, message: null});
 
-    const contextValue = { stepDetails, setValue, value, dispatch, state, setIsDisable, isDisable, maxStep, toast, setToast, toastInfo, setToastInfo}
+    const contextValue = {stepDetails, setValue, value, dispatch, state, setIsDisable, isDisable, maxStep, toast, setToast, toastInfo, setToastInfo}
 
     return (
         <MultiStepper.Provider value={contextValue}>

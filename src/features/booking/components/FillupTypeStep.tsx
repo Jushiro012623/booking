@@ -41,7 +41,7 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
     };
     
   return (
-    <div className="w-full mt-4 px-1  p-10borderrounded-lg">
+    <div className="w-full mt-4 p-10borderrounded-lg">
         <div className='flex w-96 gap-x-5 justify-between'>
             { mock_shipment_type.map((type : any) =>
                 <label

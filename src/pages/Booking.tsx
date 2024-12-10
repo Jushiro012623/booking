@@ -8,6 +8,7 @@ import FirstStep from "../features/booking/components/FirstStep";
 import { Toast } from "../components/ui/Toast";
 import { SecondStep } from "../features/booking/components/SecondStep";
 import React from "react";
+import { ThirdStep } from "../features/booking/components/ThirdStep";
 const Booking = () => {
     const {setValue, value, stepDetails, state, toast, toastInfo} = useMultiForm();
     const DocumentTitleStepNumber = () => {
@@ -33,6 +34,8 @@ const Booking = () => {
                 {/* _____________________SECOND STEP____________________ */}
                 {state.step === 2 && <SecondStep />}
                 {/* _____________________THIRD STEP_____________________ */}
+                {state.step === 3 && <ThirdStep />}
+
                 <StepController loading={false}/>
             </div>
             {toast && <Toast variant={toastInfo?.title} message={toastInfo?.message}/>}

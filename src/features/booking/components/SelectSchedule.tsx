@@ -7,17 +7,13 @@ import { ViewSelectedSchedule } from './ViewSelectedSchedule'
 import Button from '../../../components/ui/Button'
 export const SelectSchedule = () => {
     const { value } = useMultiForm()
-    const currentSelectedSchedule = (schedule : any) :boolean => {
+    const currentSelectedSchedule = (schedule : any) : boolean => {
         return schedule.id === value?.data?.schedule_id
     }
-    
     const [displayedScheduledLimit, setDisplayedScheduledLimit ] = React.useState(5)
     const [isLimited, setIsLimited ] = React.useState<boolean>(true)
     const [viewFlight, setViewFLight] = React.useState<boolean>(false)
     const [selectedSchedule, setSelectedSchedule] = React.useState<number>()
-    console.log(displayedScheduledLimit);
-    console.log(isLimited);
-    
     const handleDisplayedLimit = () => {
         setIsLimited(!isLimited)
         if(isLimited){
@@ -50,12 +46,12 @@ export const SelectSchedule = () => {
                     <Typography variant="info" className="text-yellow-500 font-semibold">{schedule.available_slots} Slots left in this schedule</Typography>
                     }
                 </div>
-                <Button size="small" variant={`border`} className={`ml-5 h-10 ${currentSelectedSchedule(schedule) ? 'bg-cerulean-blue-500 text-white hover:text-white hover:bg-cerulean-blue-600/90' : ''}`} onClick={()=>{setViewFLight(true); setSelectedSchedule(schedule.id)}} >{currentSelectedSchedule(schedule) ? 'Selected' : 'Select'}</Button>
+                <Button size="small" variant={`border`} className={`ml-5 h-10 ${currentSelectedSchedule(schedule) ? 'bg-cerulean-blue-500 text-white hover:text-white hover:bg-cerulean-blue-600/90' : ''}`} onClick={()=>{setViewFLight(true); setSelectedSchedule(schedule)}} >{currentSelectedSchedule(schedule) ? 'Selected' : 'Select'}</Button>
             </div>
         ))}
         <Button variant='plain' className='flex items-center justify-center gap-2' onClick={handleDisplayedLimit}>{isLimited ? 'See more' : 'See less'}  <IoIosArrowDown className={`transition-transform ${isLimited ? '' : '-rotate-90'}`} /> </Button>
         {/* ----------------------------------------------------VIEW SELECTED SCHEDULE---------------------------------------------------- */}
-        {viewFlight && <ViewSelectedSchedule setViewFLight={setViewFLight} selectedSchedule={selectedSchedule}  mock_schedule={mock_schedule}/>}
+        {viewFlight && <ViewSelectedSchedule setViewFLight={setViewFLight} selectedSchedule={selectedSchedule} />}
     </div>
   )
 }
