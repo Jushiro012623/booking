@@ -2,7 +2,7 @@ import React from 'react'
 import Typography from './Typography'
 import { IoClose } from "react-icons/io5";
 import { IoMdCloseCircle, IoMdCheckmarkCircle } from "react-icons/io";
-import { useMultiForm } from '../../context/MultiStepperProvider';
+import { useToast } from '../../context/ToastProvider';
 
 const colors = {
     error: {bg: 'bg-red-400', text: "text-red-400"},
@@ -18,7 +18,7 @@ interface ToastProps {
     message: string;
 }
 export const Toast = ({variant, message} : ToastProps) => {
-    const {toast,setToast} = useMultiForm()
+    const {toast,setToast} = useToast()
     React.useEffect(() => {
         if (toast) {
             const timeout = setTimeout(() => {
