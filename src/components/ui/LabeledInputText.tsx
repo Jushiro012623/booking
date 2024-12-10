@@ -11,6 +11,7 @@ interface LabeledInputText{
     className?: string;
     placeholder?: string;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    parentClass?: string;
     value?: string;
     [key: string]: any;
 }
@@ -20,6 +21,7 @@ const LabeledInputText: React.FC<LabeledInputText> = ({
     label,
     message,
     className,
+    parentClass,
     onChange = () => {},
     value,
     placeholder = label,
@@ -28,7 +30,7 @@ const LabeledInputText: React.FC<LabeledInputText> = ({
     
     const variantClass = variants[variant] || variants.default;
     return (
-      <div className='w-full'>
+      <div className={`w-full ${parentClass}`}>
         <Typography
           htmlFor={name}
           variant="label"

@@ -17,13 +17,11 @@ const StepTracker = ({ state, stepDetails }:StepTracker) => {
             return 'bg-transparent  text-gray-400 border-gray-400'
         }
     }
-    console.log(state);
-    
     return (
         <div className='rounded-[40px] border flex  px-4 py-4 gap-16 select-none shadow-md'>
             {stepDetails.map((detail : any)=>(
-                <React.Fragment>
-                    <div key={detail.id} className='cursor-pointer relative step-detail flex items-center mr-16 gap-x-4'>
+                <React.Fragment key={detail.id}>
+                    <div  className='cursor-pointer relative step-detail flex items-center mr-16 gap-x-4'>
                         <div className={`step-icon flex items-center justify-center rounded-full transition-colors duration-500 ${stateClass(state, detail)} border w-11  h-11 p-3`} >
                             {state.step > detail.id || state.status === 'complete' ? <FaCheck /> : detail.icon}
                         </div>

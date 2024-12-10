@@ -38,15 +38,13 @@ export const ViewSelectedSchedule = ({ selectedSchedule, setViewFLight} : any) =
                             <div className='w-full flex flex-col'>
                                 <Typography color='primary' variant='small' className='font-bold'>Departure</Typography>
                                 <div className='flex gap-2'>
-                                    <Typography variant='info'>{selectedSchedule.date}</Typography>
-                                    <Typography variant='info'>{selectedSchedule.departure}</Typography>
+                                    <Typography variant='info'>{selectedSchedule.departure_date} : {selectedSchedule.departure_time}</Typography>
                                 </div>
                             </div>
                             <div className='w-full flex flex-col'>
                                 <Typography color='primary' variant='small' className='font-bold'>Arrival</Typography>
                                 <div className='flex gap-2'>
-                                    <Typography variant='info'>{selectedSchedule.date}</Typography>
-                                    <Typography variant='info'>{selectedSchedule.arrival}</Typography>
+                                    <Typography variant='info'>{selectedSchedule.arrival_date} : {selectedSchedule.arrival_time}</Typography>
                                 </div>
                             </div>
                         </div>

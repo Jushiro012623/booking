@@ -10,7 +10,8 @@ import { SecondStep } from "../features/booking/components/SecondStep";
 import React from "react";
 import { ThirdStep } from "../features/booking/components/ThirdStep";
 const Booking = () => {
-    const {setValue, value, stepDetails, state, toast, toastInfo} = useMultiForm();
+    const {setValue, value, stepDetails,setIsDisable, state, toast, toastInfo,setToast, setToastInfo, dispatch} = useMultiForm();
+    const [submitting, setIsSubmitting] = React.useState<boolean>(false)
     const DocumentTitleStepNumber = () => {
         switch(state.step){
             case 1: return 'Step 1'
@@ -20,6 +21,45 @@ const Booking = () => {
             default: return 'Step 1'
         }
     }
+    const handleOnSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        try{
+            dispatch({type: 'COMPLETE'})
+            setIsSubmitting(true)
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+            setToastInfo({title: 'success', message: 'Booking successful!'})
+        }
+        catch(e) {
+            setToastInfo({title: 'error', message: 'Failed to book'})
+        }finally{
+            setIsSubmitting(false)
+            setToast(true)
+        }
+    }
+    
+    React.useEffect(() => {
+        const hasRoute = value?.data.route_id
+        const hasPersonalInfo = value?.data?.name && value?.data?.email
+        const hasShipmentType = value?.data?.type_id
+        const hasCompletedTypeFillup= () => {
+            switch(value?.data?.type_id){
+                case 1:
+                    return value?.data?.discount_id && value?.data?.passenger_quantity
+                case 2:
+                    return value?.data?.plate_number && value?.data?.weight_id &&  value?.data?.vehicle_type
+                case 3:
+                    return value?.data?.description && value?.data?.item_quantity &&  value?.data?.item_name &&  value?.data?.weight_id
+                default: 
+                    return false
+            }
+        }
+        const canProceed = hasRoute && hasPersonalInfo && hasShipmentType && hasCompletedTypeFillup()
+        if(canProceed){
+            setIsDisable(false)
+        }else{
+            setIsDisable(true)
+        }
+    },[value])
     const memoSchedule = React.useMemo(() => value?.data?.type_id, [value?.data?.type_id]);
     React.useEffect(() => {
         setValue((prev : any) => ({...prev, data: {...prev?.data, schedule_id: null} } ))
@@ -27,7 +67,7 @@ const Booking = () => {
     useDocumentTitle(`Booking Process | ${DocumentTitleStepNumber()}`);
     return (
         <section className="w-full min-h-screen py-[120px] px-[5%] place-items-center">
-            <div>
+            <form onSubmit={handleOnSubmit}>
                 <StepTracker state={state} stepDetails={stepDetails} />
                 {/* _____________________FIRST STEP_____________________ */}
                 {state.step === 1 && <FirstStep mock_routes={mock_routes}/>}
@@ -36,8 +76,8 @@ const Booking = () => {
                 {/* _____________________THIRD STEP_____________________ */}
                 {state.step === 3 && <ThirdStep />}
 
-                <StepController loading={false}/>
-            </div>
+                <StepController loading={submitting}/>
+            </form>
             {toast && <Toast variant={toastInfo?.title} message={toastInfo?.message}/>}
         </section>
     )

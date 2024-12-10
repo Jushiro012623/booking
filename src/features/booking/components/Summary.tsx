@@ -4,7 +4,7 @@ import Typography from '../../../components/ui/Typography'
 export const Summary = ({value} : any) => {
   return (
     <React.Fragment>
-                <Typography variant="h6" className='text-cerulean-blue-500 border-b-2 border-dotted border-slate-200 pb-2 font-semibold'>Selection Details</Typography>
+        <Typography variant="h6" className='text-cerulean-blue-500 border-b-2 border-dotted border-slate-200 pb-2 font-semibold'>Selection Details</Typography>
         {value.data.type_id === 1 && <React.Fragment>
                 <Typography variant="body2" className='mt-2 flex justify-between'><span className='font-medium'>Discount</span> <span>{value.discount}</span></Typography>
                 <Typography variant="body2" className='mt-2 flex justify-between'><span className='font-medium'>Boarding Count</span> <span>{value.data.passenger_quantity}</span></Typography>

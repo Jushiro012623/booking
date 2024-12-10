@@ -24,9 +24,10 @@ interface ButtonProps{
     children: React.ReactNode;
     variant?: keyof typeof variants;
     size?: keyof typeof sizes;
+    type?: 'button' |'submit' |'reset'; 
     [key: string]: any; 
 }
-const Button: React.FC<ButtonProps> = ({ onClick, className, children, variant = 'primary', size = 'small', ...props }) => {
+const Button: React.FC<ButtonProps> = ({type = 'button', onClick, className, children, variant = 'primary', size = 'small', ...props }) => {
   const buttonRef = useRef(null);
   return (
     <button
@@ -39,6 +40,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, className, children, variant =
       )}
       onClick={onClick}
       {...props}
+      type={type}
     >
       {children}
     </button>

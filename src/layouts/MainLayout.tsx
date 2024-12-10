@@ -1,14 +1,20 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import { Outlet } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import Footer from '../components/Footer'
+import { useAuthProvider } from '../context/AuthenticationProvider'
 
 export default function MainLayout() {
     useDocumentTitle('Pacific Ocean')
-    return <React.Fragment>
-                <Navbar />
-                <Outlet />
-                <Footer />
-            </React.Fragment> 
+    const { token } = useAuthProvider();
+    return (
+            token ? <React.Fragment>
+                        <Navbar />
+                        <Outlet />
+                        <Footer />
+                    </React.Fragment> 
+            : <Navigate to="/login" />)
+
+            
 }

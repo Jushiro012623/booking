@@ -4,9 +4,10 @@ import { useMultiForm } from '../../../context/MultiStepperProvider'
 import { SelectSchedule } from './SelectSchedule'
 
 export const SecondStep = () => {
-    const {value,setIsDisable} = useMultiForm()
+    const {value, setIsDisable} = useMultiForm()
     React.useEffect(() => {
-        if(value?.data?.schedule_id){
+        const hasSelectedSchedule = value?.data?.schedule_id !== null || undefined
+        if(hasSelectedSchedule){
             setIsDisable(false)
         }else{
             setIsDisable(true)
