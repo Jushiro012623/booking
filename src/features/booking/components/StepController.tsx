@@ -1,12 +1,15 @@
 import { FaArrowLeftLong,FaArrowRightLong  } from "react-icons/fa6";
 import Button from '../../../components/ui/Button';
 import { useMultiForm } from '../../../context/MultiStepperProvider';
+import { useToast } from "../../../context/ToastProvider";
 
 interface MultiStepper{
     loading: boolean;
 }
 export default function StepController({loading}:MultiStepper) {
-    const {state, dispatch, maxStep, isDisable, setToast, setToastInfo, toast} = useMultiForm()
+
+    const {setToast, setToastInfo, toast} = useToast()
+    const {state, dispatch, maxStep, isDisable} = useMultiForm()
     const handleDispatch = () => {
         if (!isDisable){
             if (state.step !== maxStep) {

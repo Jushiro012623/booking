@@ -10,10 +10,11 @@ import { useAuthProvider } from '../context/AuthenticationProvider';
 import { useMultiForm } from '../context/MultiStepperProvider';
 import { BiLoaderAlt } from "react-icons/bi";
 import { Toast } from '../components/ui/Toast';
+import { useToast } from '../context/ToastProvider';
 export const Login = () => {
     useDocumentTitle('Booking Process | Login')
     const {login, token} = useAuthProvider()
-    const {setToast, setToastInfo,toastInfo, toast} = useMultiForm()
+    const {setToast, setToastInfo,toastInfo, toast} = useToast()
     const [input, setInput] = React.useState<any>({});
     const [loading, setLoading] = React.useState<boolean>(false);
     const handleChange = (field : string, value : string) => {

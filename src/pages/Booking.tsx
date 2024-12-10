@@ -9,8 +9,10 @@ import { Toast } from "../components/ui/Toast";
 import { SecondStep } from "../features/booking/components/SecondStep";
 import React from "react";
 import { ThirdStep } from "../features/booking/components/ThirdStep";
+import { useToast } from "../context/ToastProvider";
 const Booking = () => {
-    const {setValue, value, stepDetails,setIsDisable, state, toast, toastInfo,setToast, setToastInfo, dispatch} = useMultiForm();
+    const {toast, toastInfo,setToast, setToastInfo} = useToast()
+    const {setValue, value, stepDetails,setIsDisable, state, dispatch} = useMultiForm();
     const [submitting, setIsSubmitting] = React.useState<boolean>(false)
     const DocumentTitleStepNumber = () => {
         switch(state.step){
