@@ -25,6 +25,7 @@ export const colors = {
   default: "text-slate-900",
   primary: "text-blue-500",
   secondary: "text-green-500",
+  teal: "text-teal-500",
   danger: "text-red-400",
   warning: "text-yellow-500",
   highlight: "text-teal-500",

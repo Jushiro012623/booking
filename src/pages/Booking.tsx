@@ -5,14 +5,14 @@ import StepTracker from "../features/booking/components/StepTracker";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { mock_routes  } from "../mock/Data"
 import FirstStep from "../features/booking/components/FirstStep";
-import { Toast } from "../components/ui/Toast";
 import { SecondStep } from "../features/booking/components/SecondStep";
 import React from "react";
 import { ThirdStep } from "../features/booking/components/ThirdStep";
 import { useToast } from "../context/ToastProvider";
+import { Navigate } from "react-router-dom";
 const Booking = () => {
-    const {toast, toastInfo,setToast, setToastInfo} = useToast()
-    const {setValue, value, stepDetails,setIsDisable, state, dispatch} = useMultiForm();
+    const {setToast, setToastInfo} = useToast()
+    const { setValue, value, stepDetails, state, dispatch} = useMultiForm();
     const [submitting, setIsSubmitting] = React.useState<boolean>(false)
     const DocumentTitleStepNumber = () => {
         switch(state.step){
@@ -26,10 +26,11 @@ const Booking = () => {
     const handleOnSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try{
-            dispatch({type: 'COMPLETE'})
             setIsSubmitting(true)
             await new Promise((resolve) => setTimeout(resolve, 2000));
             setToastInfo({title: 'success', message: 'Booking successful!'})
+            setValue(null)
+            dispatch({type: 'COMPLETE'})
         }
         catch(e) {
             setToastInfo({title: 'error', message: 'Failed to book'})
@@ -38,48 +39,43 @@ const Booking = () => {
             setToast(true)
         }
     }
-    
+    const memoizedTypeId = React.useMemo(() => value?.data?.type_id, [value?.data?.type_id]);
     React.useEffect(() => {
-        const hasRoute = value?.data.route_id
-        const hasPersonalInfo = value?.data?.name && value?.data?.email
-        const hasShipmentType = value?.data?.type_id
-        const hasCompletedTypeFillup= () => {
-            switch(value?.data?.type_id){
-                case 1:
-                    return value?.data?.discount_id && value?.data?.passenger_quantity
-                case 2:
-                    return value?.data?.plate_number && value?.data?.weight_id &&  value?.data?.vehicle_type
-                case 3:
-                    return value?.data?.description && value?.data?.item_quantity &&  value?.data?.item_name &&  value?.data?.weight_id
-                default: 
-                    return false
+        const typeNumber = value?.data?.type_id
+        const whatType = () => {
+            if(typeNumber !== 1){
+                delete value?.data?.passenger_quantity;
+                delete value?.data?.additional;
+                delete value?.data?.discount_id;
             }
+            if(typeNumber === 1){
+                delete value?.data?.weight_id;
+            }
+            if(typeNumber !== 2){
+                delete value?.data?.vehicle_type;
+                delete value?.data?.plate_number;
+            }
+            if(typeNumber !== 3){
+                delete value?.data?.item_quantity;
+                delete value?.data?.description;
+                delete value?.data?.item_name;
+            }
+            return value?.data
         }
-        const canProceed = hasRoute && hasPersonalInfo && hasShipmentType && hasCompletedTypeFillup()
-        if(canProceed){
-            setIsDisable(false)
-        }else{
-            setIsDisable(true)
-        }
-    },[value])
-    const memoSchedule = React.useMemo(() => value?.data?.type_id, [value?.data?.type_id]);
-    React.useEffect(() => {
         setValue((prev : any) => ({...prev, 
-            data: {...prev?.data, 
+            data: {
+                ...prev?.data,
                 schedule_id: null,
-                weight_id: null,
-                plate_number: null,
-                item_quantity: null,
-                passenger_quantity: null,
-                description: null,
-                additional: null,
-                vehicle_type: null,
-                discount_id: null,
+                ...whatType()
+
             },
             weight: null, discount:null
      } ))
-    }, [memoSchedule])
+    }, [memoizedTypeId])
     useDocumentTitle(`Booking Process | ${DocumentTitleStepNumber()}`);
+    if(state.status === 'complete'){
+        return <Navigate to="complete" />
+    }
     return (
         <section className="w-full min-h-screen py-[120px] px-[5%] place-items-center">
             <form onSubmit={handleOnSubmit}>
@@ -93,7 +89,7 @@ const Booking = () => {
 
                 {<StepController loading={submitting} />}
             </form>
-            {toast && <Toast variant={toastInfo?.title} message={toastInfo?.message}/>}
+            {/*  */}
         </section>
     )
 };

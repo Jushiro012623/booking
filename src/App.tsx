@@ -8,13 +8,13 @@ import ToastProvider from './context/ToastProvider'
 export default function App() {
   return (
     <React.Fragment>
+        <ToastProvider>
             <AuthenticationProvider>
-                <ToastProvider>
                     <MultiStepperProvider>
                         <RouterProvider router={MainRouter}/>
                     </MultiStepperProvider>
-                </ToastProvider>
             </AuthenticationProvider>
+        </ToastProvider>
     </React.Fragment>
   )
 }

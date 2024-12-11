@@ -11,8 +11,8 @@ interface MultiStepper {
     value: any;
     dispatch: (action: { type: string }) => void;
     state: any;
-    setIsDisable: (isDisable: boolean) => void;
-    isDisable: boolean;
+    setCanProceed: (canProceed: boolean) => void;
+    canProceed: boolean;
     setRequired: (required: any) => void;
     required: any;
     maxStep: number;
@@ -26,12 +26,12 @@ export default function MultiStepperProvider({children}:MultiStepperProvider) {
         { id: 3, icon: <IoBoat />, details: "Confirm" },
         // { id: 4, icon: <IoBoat />, details: "Confirm" },
     ];
-    const [isDisable, setIsDisable] = React.useState(true)
+    const [canProceed, setCanProceed] = React.useState(true)
     const { dispatch, state, maxStep } = useStepManager(stepDetails.length)
     const [value, setValue] = React.useState()   
     const [required, setRequired] = React.useState()   
 
-    const contextValue = {required, setRequired,stepDetails, setValue, value, dispatch, state, setIsDisable, isDisable, maxStep}
+    const contextValue = {required, setRequired,stepDetails, setValue, value, dispatch, state, setCanProceed, canProceed, maxStep}
 
     return (
         <MultiStepper.Provider value={contextValue}>

@@ -8,6 +8,7 @@ const variants = {
   light: 'bg-white border text-slate-900 hover:bg-gray-100',
   dark: 'bg-slate-700 text-white border-transparent hover:bg-slate-800',
   border: 'bg-border border text-slate-900 hover:bg-gray-200 hover:text-slate-900',
+  success: 'bg-border bg-teal-500 border-teal-500 text-white hover:bg-teal-600',
   plain: ''
 };
 

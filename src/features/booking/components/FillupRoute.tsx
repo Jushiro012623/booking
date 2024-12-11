@@ -5,7 +5,7 @@ import { isSelected } from '../../../utils/MultiForm'
 import Typography from '../../../components/ui/Typography'
 import { useMultiForm } from '../../../context/MultiStepperProvider'
 import { mock_routes } from '../../../mock/Data'
-
+import isRequired from '../../../assets/icon-required.svg'
 export const FillupRoute = ({initialRouteType, handleOnRouteChoose, firstStepInitData} : any) => {
     const { value } = useMultiForm() 
     const [routeType, setRouteType] = React.useState<string>(initialRouteType);
@@ -16,7 +16,7 @@ export const FillupRoute = ({initialRouteType, handleOnRouteChoose, firstStepIni
   return (
     <React.Fragment>
         <div className={``}>
-            <div className={`w-full flex gap-3 mt-4`}>
+            <div className={`w-full flex gap-3 mt-2`}>
                 <Button
                     variant="plain"
                     type="button"
@@ -32,8 +32,9 @@ export const FillupRoute = ({initialRouteType, handleOnRouteChoose, firstStepIni
                     IN
                 </Button>
                 {/*---------------------------Chosen Route---------------------------*/}
-                <div className="grow relative border h-11 rounded-md place-content-center place-items-center cursor-pointer select-none" onClick={() => setRouteOpen(!routeOpen)}>
+                <div className="grow overflow-hidden relative border h-11 rounded-md place-content-center place-items-center cursor-pointer select-none" onClick={() => setRouteOpen(!routeOpen)}>
                     <IoIosArrowDown className={`absolute top-1/2 right-5 -translate-y-1/2 transition-transform  ${routeOpen ? '' : '-rotate-90'}`}/>
+                    <img src={isRequired} alt="" className='absolute top-0 left-0'/>
                     <div className={`w-full`}>
                         { value?.data.route_id ? 
                             <div key={value?.route.id} className='w-full relative flex justify-center gap-10'>

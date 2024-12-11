@@ -9,19 +9,21 @@ interface MultiStepper{
 export default function StepController({loading}:MultiStepper) {
 
     const {setToast, setToastInfo, toast} = useToast()
-    const {state, dispatch, maxStep, isDisable} = useMultiForm()
+    const {state, dispatch, maxStep, canProceed} = useMultiForm()
+    
     const handleDispatch = () => {
         
-        if (!isDisable){
+        if (!canProceed){
             if (state.step !== maxStep) {
                 dispatch({ type: "NEXT" });
             } 
             else {
-                dispatch({ type: "COMPLETE" });
+                dispatch({ type: "FINISH" });
             }
             setToastInfo({title: null, message: null});
             return
-        }
+        };
+        
         if(toast){
             setToast(false)
             setTimeout(()=>{
@@ -44,8 +46,8 @@ export default function StepController({loading}:MultiStepper) {
                 <FaArrowLeftLong />Back
             </Button>
             <Button 
-                className={`flex items-center gap-2 justify-center min-w-20 ${isDisable ? 'opacity-50 pointer-events-none' : null}`} 
-                type={state.status === 'complete' ? 'submit' : 'button'}
+                className={`flex items-center gap-2 justify-center min-w-20 ${canProceed ? 'opacity-50 pointer-events-none' : null}`} 
+                type={state.status === 'finish' ? 'submit' : 'button'}
                 onClick={handleDispatch}  
             >
                 {state.step === maxStep ? (loading ? <>Please Wait...</> : <>Complete<FaArrowRightLong /></>) : <>Next<FaArrowRightLong /></>}

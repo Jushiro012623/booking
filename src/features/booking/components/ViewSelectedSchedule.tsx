@@ -3,8 +3,9 @@ import Typography from '../../../components/ui/Typography'
 import { IoIosArrowRoundForward } from 'react-icons/io'
 import Button from '../../../components/ui/Button'
 
+import { formatDate } from '../../../utils/MultiForm'
 export const ViewSelectedSchedule = ({ selectedSchedule, setViewFLight} : any) => {
-    const {value, setValue, dispatch} = useMultiForm()
+    const {value, setValue, dispatch, setCanProceed} = useMultiForm()
     const handleConfirmSchedule = () => {
         setViewFLight(false)
         setValue((prev : any) => (
@@ -14,6 +15,7 @@ export const ViewSelectedSchedule = ({ selectedSchedule, setViewFLight} : any) =
                 fare:selectedSchedule
             }
         ))
+        setCanProceed(false)
         dispatch({type: 'NEXT'})
     }
   return (
@@ -38,13 +40,13 @@ export const ViewSelectedSchedule = ({ selectedSchedule, setViewFLight} : any) =
                             <div className='w-full flex flex-col'>
                                 <Typography color='primary' variant='small' className='font-bold'>Departure</Typography>
                                 <div className='flex gap-2'>
-                                    <Typography variant='info'>{selectedSchedule.departure_date} : {selectedSchedule.departure_time}</Typography>
+                                    <Typography variant='info'>{formatDate(selectedSchedule.departure_date, true)} : {selectedSchedule.departure_time}</Typography>
                                 </div>
                             </div>
                             <div className='w-full flex flex-col'>
                                 <Typography color='primary' variant='small' className='font-bold'>Arrival</Typography>
                                 <div className='flex gap-2'>
-                                    <Typography variant='info'>{selectedSchedule.arrival_date} : {selectedSchedule.arrival_time}</Typography>
+                                    <Typography variant='info'>{formatDate(selectedSchedule.arrival_date, true)} : {selectedSchedule.arrival_time}</Typography>
                                 </div>
                             </div>
                         </div>

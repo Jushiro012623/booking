@@ -40,12 +40,12 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
     };
     
   return (
-    <div className="w-full mt-4 p-10borderrounded-lg">
+    <div className="w-full mt-2 p-10borderrounded-lg">
         <div className='flex w-96 gap-x-5 justify-between'>
             { mock_shipment_type.map((type : any) =>
                 <label
                 key={type?.id}
-                className={`relative w-full border border-neutral-300 overflow-hidden h-11  mt-3 rounded-lg cursor-pointer flex items-center gap-10 animate-appear transition-colors duration-300 ${isSelected(value?.data?.type_id || typeInitData?.id, type?.id )}`}>
+                className={`relative w-full border border-neutral-300 overflow-hidden h-11  rounded-lg cursor-pointer flex items-center gap-10 animate-appear transition-colors duration-300 ${isSelected(value?.data?.type_id || typeInitData?.id, type?.id )}`}>
                     <input
                     type="radio"
                     name="shipment_type"
@@ -59,9 +59,9 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
                 </label>
             )}
         </div>
-        {value?.data.type_id === 1 && <div className='mt-6 gap-x-5 flex '>
-            <SelectOption className="w-full" label='Discount' data={mock_discount} text={value?.discount}  handleChange={handleChange} name='discount_id'/>
-            <LabeledInputText placeholder='1' value={value?.data?.passenger_quantity || ''} className="w-full" name="passenger_quantity" label="Boarding Count" type="number" onChange={(e) => handleInputChange(e,'passenger_quantity')} />
+        {value?.data.type_id === 1 && <div className='mt-10 gap-x-5 flex '>
+            <SelectOption isRequired={true} className="w-full" label='Discount' data={mock_discount} text={value?.discount}  handleChange={handleChange} name='discount_id'/>
+            <LabeledInputText isRequired={true} placeholder='1' value={value?.data?.passenger_quantity || ''} className="w-full" name="passenger_quantity" label="Boarding Count" type="number" onChange={(e) => handleInputChange(e,'passenger_quantity')} />
             <Button variant='plain' size='custom' className={`text-xs w-1/4 py-0 px-4 h-11 place-self-end -translate-y-1 ${isSelected(value.data.additional, true)}`} 
                 onClick={() => {
                     const newAdditional = !additional
@@ -70,20 +70,19 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
                 Additional
             </Button>
         </div>}
-        {value?.data.type_id === 2 && <div className='mt-6 gap-x-5 flex'>
-            <SelectOption className="w-full" label='Weight' data={mock_weights} text={value?.weight}  handleChange={handleWeight} name='weight_id'/>
-            <LabeledInputText placeholder='Kawasaki Ninja' value={value?.data?.vehicle_type || ''} className="w-full" name="vehicle_type" label="Vehicle Type" type="text" onChange={(e) => handleInputChange(e,'vehicle_type')} />
-            <LabeledInputText placeholder='RGX-GXR-202' value={value?.data?.plate_number || ''} className="w-full" name="plate_number" label="Plate Number" type="text" onChange={(e) => handleInputChange(e,'plate_number')} />
+        {value?.data.type_id === 2 && <div className='mt-10 gap-x-5 flex'>
+            <SelectOption isRequired={true} className="w-full" label='Weight' data={mock_weights} text={value?.weight}  handleChange={handleWeight} name='weight_id'/>
+            <LabeledInputText isRequired={true} placeholder='Kawasaki Ninja' value={value?.data?.vehicle_type || ''} className="w-full" name="vehicle_type" label="Vehicle Type" type="text" onChange={(e) => handleInputChange(e,'vehicle_type')} />
+            <LabeledInputText isRequired={true} placeholder='RGX-GXR-202' value={value?.data?.plate_number || ''} className="w-full" name="plate_number" label="Plate Number" type="text" onChange={(e) => handleInputChange(e,'plate_number')} />
         </div>}
-        {value?.data.type_id === 3 && <div className='mt-6 gap-y-5 flex flex-col'>
+        {value?.data.type_id === 3 && <div className='mt-10 gap-y-5 flex flex-col'>
             <div className="flex gap-x-5 w-full">
-                <SelectOption className="w-full" label='Weight' data={mock_weights} text={value?.weight} handleChange={handleWeight} name='weight_id'/>
-                <LabeledInputText placeholder='Grains' value={value?.data?.item_name || ''} className="w-full" name="item_name" label="Item Name" type="text" onChange={(e) => handleInputChange(e,'item_name')} />
-                <LabeledInputText placeholder='1' value={value?.data?.item_quantity || ''} className="w-full" name="item_quantity" label="Item Quantity" type="number" onChange={(e) => handleInputChange(e,'item_quantity')} />
+                <SelectOption isRequired={true} className="w-full" label='Weight' data={mock_weights} text={value?.weight} handleChange={handleWeight} name='weight_id'/>
+                <LabeledInputText isRequired={true} placeholder='Grains' value={value?.data?.item_name || ''} className="w-full" name="item_name" label="Item Name" type="text" onChange={(e) => handleInputChange(e,'item_name')} />
+                <LabeledInputText isRequired={true} placeholder='1' value={value?.data?.item_quantity || ''} className="w-full" name="item_quantity" label="Item Quantity" type="number" onChange={(e) => handleInputChange(e,'item_quantity')} />
             </div>
-            <LabeledInputText placeholder='Wheats, rice, barley, oats' value={value?.data?.description || ''} className="w-full" name="description" label="Description" type="text" onChange={(e) => handleInputChange(e,'description')} />
+            <LabeledInputText isRequired={true} placeholder='Wheats, rice, barley, oats' value={value?.data?.description || ''} className="w-full" name="description" label="Description" type="text" onChange={(e) => handleInputChange(e,'description')} />
         </div>}
-
     </div>
   )
 }

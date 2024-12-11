@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Toast as Toaster } from '../components/ui/Toast';
 
 interface ToastProvider {
     children: React.ReactNode;
@@ -18,14 +18,19 @@ const ToastProvider = ({children}:ToastProvider) => {
     const contextValue = { toast, setToast, toastInfo, setToastInfo}
 
   return (
-    <Toast.Provider value={contextValue}>{children}</Toast.Provider>
+    <Toast.Provider value={contextValue}>
+        <React.Fragment>
+            {toast && <Toaster variant={toastInfo?.title} message={toastInfo?.message}/>}
+            {children}
+        </React.Fragment>
+    </Toast.Provider>
   )
 }
 export default ToastProvider 
 export const useToast = (): Toast => {
     const context = React.useContext(Toast);
     if (!context) {
-      throw new Error('useAuthProvider must be used within an AuthenticationProvider');
+      throw new Error('useToastProvider must be used within an ToastProvider');
     }
     return context;
 }

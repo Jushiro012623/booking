@@ -2,7 +2,7 @@ import React from 'react'
 import { variants } from './InputText';
 import clsx from 'clsx';
 import Typography from './Typography';
-
+import requiredImg from '../../assets/icon-required.svg'
 interface LabeledInputText{
     variant?: keyof typeof variants;
     name: string;
@@ -13,6 +13,7 @@ interface LabeledInputText{
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     parentClass?: string;
     value?: string;
+    isRequired?: boolean;
     [key: string]: any;
 }
 const LabeledInputText: React.FC<LabeledInputText> = ({
@@ -22,6 +23,7 @@ const LabeledInputText: React.FC<LabeledInputText> = ({
     message,
     className,
     parentClass,
+    isRequired= false,
     onChange = () => {},
     value,
     placeholder = label,
@@ -30,27 +32,31 @@ const LabeledInputText: React.FC<LabeledInputText> = ({
     
     const variantClass = variants[variant] || variants.default;
     return (
-      <div className={`w-full ${parentClass}`}>
+      <div className={`w-full relative ${parentClass}`}>
         <Typography
           htmlFor={name}
           variant="label"
           color={variant}
-          className={`block pl-1`}>
+          className={`block top-0 left-1 absolute -translate-y-full`}>
           {label}
         </Typography>
-        <input
-          name={name}
-          className={clsx(
-            "rounded-md h-11 text-xs outline-none px-4 w-full",
-            variantClass,
-            className
-          )}
-          placeholder={placeholder}
-          onChange={onChange}
-          value={value}
-          {...props}
-        />
-        <Typography variant="info" color={variant} className={`mt-1`}>
+        
+        <div className='relative rounded-md overflow-hidden'>
+            {isRequired && <img src={requiredImg} alt="" className='absolute top-0 left-0'/>}
+            <input
+            name={name}
+            className={clsx(
+                "rounded-md h-11 text-xs outline-none px-4 w-full",
+                variantClass,
+                className
+            )}
+            placeholder={placeholder}
+            onChange={onChange}
+            value={value}
+            {...props}
+            />
+        </div>
+        <Typography variant="info" color={variant} className={`absolute`}>
           {message}
         </Typography>
       </div>

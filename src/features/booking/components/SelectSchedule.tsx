@@ -23,20 +23,22 @@ export const SelectSchedule = () => {
         }
     }
   return (
-    <div className="mt-6 flex flex-col  w-full rounded-xl overflow-hidden shadow-xlborder">
+    <div className="mt-2 flex flex-col  w-full rounded-xl overflow-hidden shadow-xlborder">
         {mock_schedule
             .filter((schedule : any) => schedule?.type_id == value?.data.type_id)
             .slice(0, displayedScheduledLimit) 
             .map((schedule : any) => (
-            <div key={schedule.id} className={`cursor-pointer border-b w-full items-center flex px-6 py-3 h-24 `} >
+            <div key={schedule.id} className={`cursor-pointer border-b w-full items-center flex  py-3 h-24 `} >
                 <div className="flex h-full gap-x-3 items-center">
-                    <Typography variant="body2" color='primary' className="!font-bold min-w-12">{schedule.vessel}</Typography>
+                    <Typography variant="body2" color='primary' className="!font-bold min-w-16">{schedule.vessel}</Typography>
                 </div>
                 <div className="flex h-full gap-x-3 items-center ml-0 md:ml-10">
                     <div className="flex gap-x-1 items-center">
-                        <Typography variant="small" className="font-medium min-w-16 text-left">{schedule.departure_date} : {schedule.departure_time} </Typography>
+                        <Typography variant="small" className="font-medium min-w-16 text-left">{schedule.departure_date
+                        } : {schedule.departure_time} </Typography>
                         <IoIosArrowRoundForward size={20} />
-                        <Typography variant="small" className="font-medium min-w-16 text-right">{schedule.arrival_date} : {schedule.arrival_time}</Typography>
+                        <Typography variant="small" className="font-medium min-w-16 text-right">{schedule.arrival_date
+                        } : {schedule.arrival_time}</Typography>
                     </div>
                 </div>
                 <div className="flex h-full gap-x-3 flex-col items-end justify-center ml-auto">

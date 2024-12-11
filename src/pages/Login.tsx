@@ -94,11 +94,11 @@ export const Login = () => {
                         type="password"
                         label='Password'
                         placeholder='•••••••••••'
-                        parentClass='mt-3'
+                        parentClass='mt-8'
                         className='mt-1'
                         onChange={(e : React.ChangeEvent<HTMLInputElement>) => handleChange('password', e.target.value)}
                     />
-                    <Typography variant='small' className='text-right mt-1'>Forgot password?</Typography>
+                    <Typography variant='small' className='text-right mt-3'>Forgot password?</Typography>
                     <Button type='submit' className='mt-3 place-content-center place-items-center'>{loading ? <BiLoaderAlt className='text-[16px] animate-spin' /> : 'Login'}</Button>
                     <Typography
                     variant="small"

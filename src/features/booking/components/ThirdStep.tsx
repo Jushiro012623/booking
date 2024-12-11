@@ -2,6 +2,7 @@ import React from 'react'
 import Typography from '../../../components/ui/Typography'
 import { useMultiForm } from '../../../context/MultiStepperProvider'
 import { Summary } from './Summary'
+import { formatDate } from '../../../utils/MultiForm'
 
 export const ThirdStep = () => {
     const {value} = useMultiForm()
@@ -13,8 +14,8 @@ export const ThirdStep = () => {
         destination:value?.route?.destination,
         departure: value?.fare?.departure_time,
         arrival: value?.fare?.arrival_time,
-        arrival_date: value?.fare?.arrival_date,
-        departure_date: value?.fare?.departure_date,
+        arrival_date: formatDate(value?.fare?.arrival_date, true),
+        departure_date: formatDate(value?.fare?.departure_date),
         fare: value?.fare?.fare
     }
     

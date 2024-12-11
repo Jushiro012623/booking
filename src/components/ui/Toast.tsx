@@ -6,7 +6,7 @@ import { useToast } from '../../context/ToastProvider';
 
 const colors = {
     error: {bg: 'bg-red-400', text: "text-red-400"},
-    success: {bg: 'bg-green-400', text: "text-green-400"},
+    success: {bg: 'bg-teal-400', text: "text-teal-400"},
 }
 const variants = {
     error : { title: 'error', icon: <IoMdCloseCircle className={`${colors.error.text} text-3xl`} />, color: colors.error},
