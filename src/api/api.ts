@@ -1,7 +1,7 @@
 import axios from "axios";
 // import config from "../../config";
 // const BASE_URL = config.api_url;
-const BASE_URL = import.meta.env.VITE_API_DEV_URL;
+const BASE_URL = import.meta.env.VITE_API_DEV_URL || 'http://127.0.0.1:8080/api' ;
 // const BASE_URL = "https://staging-api-eticket.pisopay.com.ph/api";
 
 const api = axios.create({

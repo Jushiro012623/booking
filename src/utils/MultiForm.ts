@@ -4,6 +4,7 @@ export const isSelected = (currentValue : string | number | boolean, comparedVal
     return isTrue ? '!bg-cerulean-blue-100 border-cerulean-blue-100 border-2 border-slate-400' : '';
 }
 
+export const GENERATE_TRANSACTION_ID = `GT-${Math.random().toString(36).substring(2, 10000000000).toUpperCase()} `
 export const formatDate = (dateStr : any, full : boolean = true  ) => {
     const date = new Date(dateStr);
     const options : any = { year: 'numeric', month: 'long', day: '2-digit'};

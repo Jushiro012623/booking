@@ -10,32 +10,39 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
     const { value, setValue } = useMultiForm()
     const [typeInitData, setTypeInitData] = React.useState<{id:number, name:string}>()
     const [additional, setAdditional] = React.useState<boolean>(false)
-    const handleOnTypeChoose = (e : any) => {
-        const [preSelectType] = mock_shipment_type
-        .filter((type : any) => type.id == e.target.value)
-        setValue((prev : any) => ({
-            ...prev, 
-            data:{ ...prev?.data, type_id: preSelectType?.id},
-            shipment_type:preSelectType?.name
-        })) 
-        setTypeInitData(( prev : any )=>({...prev, ...preSelectType}));
+    const filterPreSelectData = (dataToFilter : any, filter : React.ChangeEvent<HTMLInputElement>) => {
+        return dataToFilter.filter((type : any) => type.id == filter)
     }
-    const handleWeight = (event : any, ) => {
-        const [preSelectWeight] = mock_weights
-        .filter((weight : any) => weight.id == event.target.value)
+    const handleChoosingType = (e : any) => {
+        // const [preSelectType] = mock_shipment_type
+        // .filter((type : any) => type.id == e.target.value)
+        const [filterShipmentType] = filterPreSelectData(mock_shipment_type, e.target.value)
         setValue((prev : any) => ({
             ...prev, 
-            data:{ ...prev?.data, weight_id: preSelectWeight?.id},
-            weight: preSelectWeight?.name
+            data:{ ...prev?.data, type_id: filterShipmentType?.id},
+            shipment_type:filterShipmentType?.name
+        })) 
+        setTypeInitData(( prev : any )=>({...prev, ...filterShipmentType}));
+    }
+    const handleChoosingWeight = (e : any, ) => {
+        // const [preSelectWeight] = mock_weights
+        // .filter((weight : any) => weight.id == event.target.value)
+        const [selectedWeight] = filterPreSelectData(mock_weights, e.target.value)
+        setValue((prev : any) => ({
+            ...prev, 
+            data:{ ...prev?.data, weight_id: selectedWeight?.id},
+            weight: selectedWeight?.name
         }))
     };
-    const handleChange = (event : any, ) => {
-        const [preSelectDiscount] = mock_discount
-        .filter((discount : any) => discount.id == event.target.value)
+    const handleChoosingDiscount = (e : any, ) => {
+        // const [preSelectDiscount] = mock_discount
+        // .filter((discount : any) => discount.id == event.target.value)
+        
+        const [selectedDiscount] = filterPreSelectData(mock_discount, e.target.value)
         setValue((prev : any) => ({
             ...prev, 
-            data:{ ...prev?.data, discount_id: preSelectDiscount?.id},
-            discount: preSelectDiscount?.name
+            data:{ ...prev?.data, discount_id: selectedDiscount?.id},
+            discount: selectedDiscount?.name
         }))
     };
     
@@ -51,7 +58,7 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
                     name="shipment_type"
                     value={type.id}
                     className="hidden"
-                    onChange={handleOnTypeChoose}
+                    onChange={handleChoosingType}
                     />
                     <Typography variant="small" className={`!font-medium capitalize tracking-wide w-full text-center`}>
                         {type?.name} 
@@ -60,9 +67,9 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
             )}
         </div>
         {value?.data.type_id === 1 && <div className='mt-10 gap-x-5 flex '>
-            <SelectOption isRequired={true} className="w-full" label='Discount' data={mock_discount} text={value?.discount}  handleChange={handleChange} name='discount_id'/>
+            <SelectOption isRequired={true} className="w-full" label='Discount' data={mock_discount} text={value?.discount}  handleChange={handleChoosingDiscount} name='discount_id'/>
             <LabeledInputText isRequired={true} placeholder='1' value={value?.data?.passenger_quantity || ''} className="w-full" name="passenger_quantity" label="Boarding Count" type="number" onChange={(e) => handleInputChange(e,'passenger_quantity')} />
-            <Button variant='plain' size='custom' className={`text-xs w-1/4 py-0 px-4 h-11 place-self-end -translate-y-1 ${isSelected(value.data.additional, true)}`} 
+            <Button variant='plain' size='custom' className={`text-xs w-1/4 py-0 px-4 h-11 place-self-end ${isSelected(value.data.additional, true)}`} 
                 onClick={() => {
                     const newAdditional = !additional
                     setAdditional(newAdditional); setValue((prev : any) => ({...prev,  data:{ ...prev?.data, additional: newAdditional  } }))
@@ -71,13 +78,13 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
             </Button>
         </div>}
         {value?.data.type_id === 2 && <div className='mt-10 gap-x-5 flex'>
-            <SelectOption isRequired={true} className="w-full" label='Weight' data={mock_weights} text={value?.weight}  handleChange={handleWeight} name='weight_id'/>
+            <SelectOption isRequired={true} className="w-full" label='Weight' data={mock_weights} text={value?.weight}  handleChange={handleChoosingWeight} name='weight_id'/>
             <LabeledInputText isRequired={true} placeholder='Kawasaki Ninja' value={value?.data?.vehicle_type || ''} className="w-full" name="vehicle_type" label="Vehicle Type" type="text" onChange={(e) => handleInputChange(e,'vehicle_type')} />
             <LabeledInputText isRequired={true} placeholder='RGX-GXR-202' value={value?.data?.plate_number || ''} className="w-full" name="plate_number" label="Plate Number" type="text" onChange={(e) => handleInputChange(e,'plate_number')} />
         </div>}
         {value?.data.type_id === 3 && <div className='mt-10 gap-y-5 flex flex-col'>
             <div className="flex gap-x-5 w-full">
-                <SelectOption isRequired={true} className="w-full" label='Weight' data={mock_weights} text={value?.weight} handleChange={handleWeight} name='weight_id'/>
+                <SelectOption isRequired={true} className="w-full" label='Weight' data={mock_weights} text={value?.weight} handleChange={handleChoosingWeight} name='weight_id'/>
                 <LabeledInputText isRequired={true} placeholder='Grains' value={value?.data?.item_name || ''} className="w-full" name="item_name" label="Item Name" type="text" onChange={(e) => handleInputChange(e,'item_name')} />
                 <LabeledInputText isRequired={true} placeholder='1' value={value?.data?.item_quantity || ''} className="w-full" name="item_quantity" label="Item Quantity" type="number" onChange={(e) => handleInputChange(e,'item_quantity')} />
             </div>

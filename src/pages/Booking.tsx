@@ -10,7 +10,9 @@ import React from "react";
 import { ThirdStep } from "../features/booking/components/ThirdStep";
 import { useToast } from "../context/ToastProvider";
 import { Navigate } from "react-router-dom";
+
 const Booking = () => {
+    
     const {setToast, setToastInfo} = useToast()
     const { setValue, value, stepDetails, state, dispatch} = useMultiForm();
     const [submitting, setIsSubmitting] = React.useState<boolean>(false)
@@ -78,17 +80,19 @@ const Booking = () => {
     }
     return (
         <section className="w-full min-h-screen py-[120px] px-[5%] place-items-center">
-            <form onSubmit={handleOnSubmit}>
+            <div>
                 <StepTracker state={state} stepDetails={stepDetails} />
-                {/* _____________________FIRST STEP_____________________ */}
-                {state.step === 1 && <FirstStep mock_routes={mock_routes}/>}
-                {/* _____________________SECOND STEP____________________ */}
-                {state.step === 2 && <SecondStep />}
-                {/* _____________________THIRD STEP_____________________ */}
-                {state.step === 3 && <ThirdStep />}
+                <form className="relative" onSubmit={handleOnSubmit}>
+                    {/* _____________________FIRST STEP_____________________ */}
+                    {state.step === 1 && <FirstStep mock_routes={mock_routes}/>}
+                    {/* _____________________SECOND STEP____________________ */}
+                    {state.step === 2 && <SecondStep />}
+                    {/* _____________________THIRD STEP_____________________ */}
+                    {state.step === 3 && <ThirdStep />}
+                    {<StepController loading={submitting} />}
+                </form>
 
-                {<StepController loading={submitting} />}
-            </form>
+            </div>
             {/*  */}
         </section>
     )

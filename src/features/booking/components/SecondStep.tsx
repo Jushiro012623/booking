@@ -10,7 +10,6 @@ export const SecondStep = () => {
         const hasSelectedSchedule = value?.data?.schedule_id === null || undefined ? true : false
         setCanProceed(hasSelectedSchedule)
     },[value])
-    console.log(value);
     
   return (
     <div className='w-full mt-16 mb-10'>
