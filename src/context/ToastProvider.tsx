@@ -8,13 +8,13 @@ interface Toast{
     toast: boolean;
     setToast: (toast: boolean) => void;
     toastInfo: any;
-    setToastInfo: (toast: any) => void;
+    setToastInfo: (toastInfo: any) => void;
 }
 
 export const Toast = React.createContext<Toast | undefined>(undefined);
 const ToastProvider = ({children}:ToastProvider) => {
     const [toast, setToast] = React.useState<boolean>(false);
-    const [toastInfo, setToastInfo] = React.useState<any>({title: null, message: null});
+    const [toastInfo, setToastInfo] = React.useState <{title: any | null , message: any | null }> ({title: null, message: null});
     const contextValue = { toast, setToast, toastInfo, setToastInfo}
 
   return (

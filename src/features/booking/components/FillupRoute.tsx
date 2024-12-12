@@ -4,9 +4,8 @@ import Button from '../../../components/ui/Button'
 import { isSelected } from '../../../utils/MultiForm'
 import Typography from '../../../components/ui/Typography'
 import { useMultiForm } from '../../../context/MultiStepperProvider'
-import { mock_routes } from '../../../mock/Data'
 import isRequired from '../../../assets/icon-required.svg'
-export const FillupRoute = ({initialRouteType, handleOnRouteChoose, firstStepInitData} : any) => {
+export const FillupRoute = ({initialRouteType, handleOnRouteChoose, firstStepInitData,routes} : any) => {
     const { value } = useMultiForm() 
     const [routeType, setRouteType] = React.useState<string>(initialRouteType);
     const [routeOpen, setRouteOpen] = React.useState<boolean>(false);
@@ -54,7 +53,7 @@ export const FillupRoute = ({initialRouteType, handleOnRouteChoose, firstStepIni
                 </div>
             </div>
             <div className={`overflow-hidden transition-all px-1 duration-300 ${routeOpen ? 'h-[182px]' : 'h-0'}`}>
-                { routeOpen && mock_routes
+                { routeOpen && routes
                 .filter((route: any) => route.transportation_type === routeType)
                 .map((route : any) => ( <Typography variant='label'
                     key={route?.id}

@@ -41,8 +41,7 @@ const LabeledInputText: React.FC<LabeledInputText> = ({
           {label}
         </Typography>
         
-        <div className='relative rounded-md overflow-hidden'>
-            {isRequired && <img src={requiredImg} alt="" className='absolute top-0 left-0'/>}
+        <div className='h-full w-full relative rounded-md'>
             <input
             name={name}
             className={clsx(
@@ -55,6 +54,7 @@ const LabeledInputText: React.FC<LabeledInputText> = ({
             value={value}
             {...props}
             />
+            {isRequired && <img src={requiredImg} alt="" className='absolute top-[1px] left-[1px] block z-[10]' style={{borderTopLeftRadius: '5px'}}/>}
         </div>
         <Typography variant="info" color={variant} className={`absolute`}>
           {message}

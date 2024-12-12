@@ -13,9 +13,9 @@ import { Navigate } from "react-router-dom";
 
 const Booking = () => {
     
-    const {setToast, setToastInfo} = useToast()
-    const { setValue, value, stepDetails, state, dispatch} = useMultiForm();
-    const [submitting, setIsSubmitting] = React.useState<boolean>(false)
+    const { setToast, setToastInfo } = useToast()
+    const { setValue, value, stepDetails, state, dispatch } = useMultiForm();
+    const [ submitting, setIsSubmitting ] = React.useState<boolean>(false)
     const DocumentTitleStepNumber = () => {
         switch(state.step){
             case 1: return 'Step 1'
@@ -84,7 +84,7 @@ const Booking = () => {
                 <StepTracker state={state} stepDetails={stepDetails} />
                 <form className="relative" onSubmit={handleOnSubmit}>
                     {/* _____________________FIRST STEP_____________________ */}
-                    {state.step === 1 && <FirstStep mock_routes={mock_routes}/>}
+                    {state.step === 1 && <FirstStep routes={mock_routes}/>}
                     {/* _____________________SECOND STEP____________________ */}
                     {state.step === 2 && <SecondStep />}
                     {/* _____________________THIRD STEP_____________________ */}
@@ -93,7 +93,6 @@ const Booking = () => {
                 </form>
 
             </div>
-            {/*  */}
         </section>
     )
 };

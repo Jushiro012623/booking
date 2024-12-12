@@ -35,9 +35,6 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
         }))
     };
     const handleChoosingDiscount = (e : any, ) => {
-        // const [preSelectDiscount] = mock_discount
-        // .filter((discount : any) => discount.id == event.target.value)
-        
         const [selectedDiscount] = filterPreSelectData(mock_discount, e.target.value)
         setValue((prev : any) => ({
             ...prev, 
@@ -45,12 +42,10 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
             discount: selectedDiscount?.name
         }))
     };
-    
   return (
     <div className="w-full mt-2 p-10borderrounded-lg">
         <div className='flex w-96 gap-x-5 justify-between'>
-            { mock_shipment_type.map((type : any) =>
-                <label
+            { mock_shipment_type.map((type : any) =><label
                 key={type?.id}
                 className={`relative w-full border border-neutral-300 overflow-hidden h-11  rounded-lg cursor-pointer flex items-center gap-10 animate-appear transition-colors duration-300 ${isSelected(value?.data?.type_id || typeInitData?.id, type?.id )}`}>
                     <input
@@ -63,8 +58,7 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
                     <Typography variant="small" className={`!font-medium capitalize tracking-wide w-full text-center`}>
                         {type?.name} 
                     </Typography>
-                </label>
-            )}
+            </label>)}
         </div>
         {value?.data.type_id === 1 && <div className='mt-10 gap-x-5 flex '>
             <SelectOption isRequired={true} className="w-full" label='Discount' data={mock_discount} text={value?.discount}  handleChange={handleChoosingDiscount} name='discount_id'/>

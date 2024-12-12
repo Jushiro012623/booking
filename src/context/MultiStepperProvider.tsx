@@ -26,12 +26,13 @@ export default function MultiStepperProvider({children}:MultiStepperProvider) {
         { id: 3, icon: <IoBoat />, details: "Confirm" },
         // { id: 4, icon: <IoBoat />, details: "Confirm" },
     ];
-    const [canProceed, setCanProceed] = React.useState(true)
     const { dispatch, state, maxStep } = useStepManager(stepDetails.length)
-    const [value, setValue] = React.useState()   
-    const [required, setRequired] = React.useState()   
 
-    const contextValue = {required, setRequired,stepDetails, setValue, value, dispatch, state, setCanProceed, canProceed, maxStep}
+    const [ canProceed, setCanProceed ] = React.useState(true)
+    const [ value, setValue ] = React.useState()   
+    const [ required, setRequired ] = React.useState()   
+
+    const contextValue = {required, setRequired, stepDetails, setValue, value, dispatch, state, setCanProceed, canProceed, maxStep}
 
     return (
         <MultiStepper.Provider value={contextValue}>

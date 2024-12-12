@@ -7,13 +7,13 @@ import { FillupRoute } from './FillupRoute';
 import { firstStepValition  } from '../../../utils/validation';
 import requiredImg from '../../../assets/icon-required.svg'
 import { IoIosWarning } from "react-icons/io";
-const FirstStep = ({mock_routes}:any) => {
+const FirstStep = ({routes}:any) => {
     const { value, setValue, setCanProceed } = useMultiForm();
     const [firstStepInitData, setFirstStepInitData] = React.useState<any>();
     const initialRouteType : string = firstStepInitData?.transportation_type || value?.route?.transportation_type || "out";
     
     const handleOnRouteChoose = (e : any) => {
-        const [selectedRoute] = mock_routes
+        const [selectedRoute] = routes
         .filter((route : any) => route.id == e.target.value)
         setValue((prev : any) => ({
             ...prev, 
@@ -48,7 +48,7 @@ const FirstStep = ({mock_routes}:any) => {
                 {/* -----------------------------------ROUTES FIELD----------------------------------- */}
                 
                 <Typography variant="body2" className='mt-6 font-medium'>Route information</Typography>
-                <FillupRoute initialRouteType={initialRouteType} handleOnRouteChoose={handleOnRouteChoose} firstStepInitData={firstStepInitData}/>
+                <FillupRoute routes={routes} initialRouteType={initialRouteType} handleOnRouteChoose={handleOnRouteChoose} firstStepInitData={firstStepInitData}/>
                 <span className='block border-b-2 border-dotted  h-1 mt-7' />
                 {/* -------------------------------SHIPMENT TYPE FIELD-------------------------------- */}
                 <Typography variant="body2" className='mt-5 font-medium'>Shipment information</Typography>
@@ -66,3 +66,4 @@ const FirstStep = ({mock_routes}:any) => {
     )
 }
 export default FirstStep
+
