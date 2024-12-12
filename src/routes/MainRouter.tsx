@@ -15,10 +15,10 @@ const MainRouter = createBrowserRouter(
     <React.Fragment>
         <Route path='/' element={<MainLayout />} >
             <Route index element={<Booking />} />
-            <Route path="/complete" element={<BookingComplete />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/complete" element={<BookingComplete />} />
     </React.Fragment>
   )
 );
