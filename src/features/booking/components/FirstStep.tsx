@@ -7,13 +7,13 @@ import { FillupRoute } from './FillupRoute';
 import { firstStepValition  } from '../../../utils/validation';
 import requiredImg from '../../../assets/icon-required.svg'
 import { IoIosWarning } from "react-icons/io";
-const FirstStep = ({routes}:any) => {
+const FirstStep = ({mock_routes}:any) => {
     const { value, setValue, setCanProceed } = useMultiForm();
     const [firstStepInitData, setFirstStepInitData] = React.useState<any>();
     const initialRouteType : string = firstStepInitData?.transportation_type || value?.route?.transportation_type || "out";
     
     const handleOnRouteChoose = (e : any) => {
-        const [selectedRoute] = routes
+        const [selectedRoute] = mock_routes
         .filter((route : any) => route.id == e.target.value)
         setValue((prev : any) => ({
             ...prev, 
