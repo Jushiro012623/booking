@@ -9,7 +9,7 @@ import { cred } from '../mock/Credentials';
 import { useAuthProvider } from '../context/AuthenticationProvider';
 import { BiLoaderAlt } from "react-icons/bi";
 import { useToast } from '../context/ToastProvider';
-export const Login = () => {
+const Login = () => {
     useDocumentTitle('Booking Process | Login')
     const {login, token} = useAuthProvider()
     const {setToast, setToastInfo} = useToast()
@@ -91,3 +91,4 @@ export const Login = () => {
     </React.Fragment>
   )
 }
+export default Login

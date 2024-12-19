@@ -12,7 +12,7 @@ export default function NotFound() {
     <React.Fragment>
         <div className='w-full h-screen place-items-center place-content-center'>
             <img src={notfound} alt="" className='w-[250px]'/>
-            <Typography className={`mt-10 text-[3rem] font-bold text-red-400`}>404 | Page Not Found</Typography>
+            <Typography color='danger' className={`mt-10 text-[3rem] font-bold`}>404 | Page Not Found</Typography>
             <Typography variant='body2' className={`w-[450px] text-center mt-10`}>Sorry, the page you’re looking for doesn’t seem to exist. It might have been moved, deleted, or never existed in the first place.</Typography>
             <NavLink to="/"> <Button variant='border' className={`mt-6 w-full !px-10`}> Go back to {token ? 'Homepage' : 'Login'}</Button> </NavLink>
         </div>

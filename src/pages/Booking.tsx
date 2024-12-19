@@ -42,7 +42,7 @@ const Booking = () => {
         }
     }
     const memoizedTypeId = React.useMemo(() => value?.data?.type_id, [value?.data?.type_id]);
-    React.useEffect(() => {
+    const updateValuePayload = () => {
         const typeNumber = value?.data?.type_id
         const whatType = () => {
             if(typeNumber !== 1){
@@ -61,6 +61,8 @@ const Booking = () => {
                 delete value?.data?.item_quantity;
                 delete value?.data?.description;
                 delete value?.data?.item_name;
+                delete value?.data?.bill_of_landing;
+                delete value?.data?.baggage;
             }
             return value?.data
         }
@@ -73,14 +75,19 @@ const Booking = () => {
             },
             weight: null, discount:null
      } ))
+    }
+    React.useEffect(() => {
+        updateValuePayload()
     }, [memoizedTypeId])
+
     useDocumentTitle(`Booking Process | ${DocumentTitleStepNumber()}`);
+
     if(state.status === 'complete'){
         return <Navigate to="complete" />
     }
     return (
         <section className="w-full min-h-screen py-[120px] px-[5%] place-items-center">
-            <div>
+            <div className=" max-w-[772px]">
                 <StepTracker state={state} stepDetails={stepDetails} />
                 <form className="relative" onSubmit={handleOnSubmit}>
                     {/* _____________________FIRST STEP_____________________ */}

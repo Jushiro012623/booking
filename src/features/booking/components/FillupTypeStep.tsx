@@ -10,6 +10,8 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
     const { value, setValue } = useMultiForm()
     const [typeInitData, setTypeInitData] = React.useState<{id:number, name:string}>()
     const [additional, setAdditional] = React.useState<boolean>(false)
+    console.log(value?.data);
+    
     const filterPreSelectData = (dataToFilter : any, filter : React.ChangeEvent<HTMLInputElement>) => {
         return dataToFilter.filter((type : any) => type.id == filter)
     }
@@ -77,12 +79,15 @@ export const FillupTypeStep = ({handleInputChange} : any) => {
             <LabeledInputText isRequired={true} placeholder='RGX-GXR-202' value={value?.data?.plate_number || ''} className="w-full" name="plate_number" label="Plate Number" type="text" onChange={(e) => handleInputChange(e,'plate_number')} />
         </div>}
         {value?.data.type_id === 3 && <div className='mt-10 gap-y-5 flex flex-col'>
-            <div className="flex gap-x-5 w-full">
-                <SelectOption isRequired={true} className="w-full" label='Weight' data={mock_weights} text={value?.weight} handleChange={handleChoosingWeight} name='weight_id'/>
-                <LabeledInputText isRequired={true} placeholder='Grains' value={value?.data?.item_name || ''} className="w-full" name="item_name" label="Item Name" type="text" onChange={(e) => handleInputChange(e,'item_name')} />
-                <LabeledInputText isRequired={true} placeholder='1' value={value?.data?.item_quantity || ''} className="w-full" name="item_quantity" label="Item Quantity" type="number" onChange={(e) => handleInputChange(e,'item_quantity')} />
+            <div className="grid grid-cols-5 gap-x-5 gap-y-7 w-full">
+                <SelectOption isRequired={true} className="col-span-2" label='Weight' data={mock_weights} text={value?.weight} handleChange={handleChoosingWeight} name='weight_id'/>
+                <LabeledInputText isRequired={true} placeholder='Grains' value={value?.data?.item_name || ''} parentClass="col-span-2" name="item_name" label="Item Name" type="text" onChange={(e) => handleInputChange(e,'item_name')} />
+                <LabeledInputText isRequired={true} placeholder='1' value={value?.data?.item_quantity || ''} parentClass="col-span-1" name="item_quantity" label="Item Quantity" type="number" onChange={(e) => handleInputChange(e,'item_quantity')} />
+                <LabeledInputText isRequired={true} placeholder='Baggage' value={value?.data?.baggage || ''} parentClass="col-span-2" name="baggage" label="Baggage" type="text" onChange={(e) => handleInputChange(e,'baggage')} />
+                <LabeledInputText isRequired={true} value={value?.data?.bill_of_landing || ''} parentClass="col-span-2 " className='pt-2.5 uppercase' name="bill_of_landing" label="Bill of Landing" type="file" onChange={(e) => handleInputChange(e,'bill_of_landing')} />
+                {/* <input type="file" id="bill_of_landing" name="bill_of_landing" accept="image/png, image/jpeg" className='col-span-2 border text-[10px] flex items-center justify-center pt-4 rounded' /> */}
+                <LabeledInputText isRequired={true} placeholder='Wheats, rice, barley, oats' value={value?.data?.description || ''} parentClass="col-span-3" name="description" label="Description" type="text" onChange={(e) => handleInputChange(e,'description')} />
             </div>
-            <LabeledInputText isRequired={true} placeholder='Wheats, rice, barley, oats' value={value?.data?.description || ''} className="w-full" name="description" label="Description" type="text" onChange={(e) => handleInputChange(e,'description')} />
         </div>}
     </div>
   )

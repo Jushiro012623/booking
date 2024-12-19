@@ -1,10 +1,10 @@
 import React from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
-import MainLayout from '../layouts/MainLayout';
 import Loadable from './Loadable';
-import { Login } from '../pages/Login';
 
+const MainLayout = Loadable(React.lazy(() => import('../layouts/MainLayout')));
 const NotFound = Loadable(React.lazy(() => import('../pages/NotFound')));
+const Login = Loadable(React.lazy(() => import('../pages/Login')));
 const Booking = Loadable(React.lazy(() => import('../pages/Booking')));
 const BookingComplete = Loadable(React.lazy(() => import('../pages/BookingComplete')));
 

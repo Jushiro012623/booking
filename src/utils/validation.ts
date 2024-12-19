@@ -12,12 +12,14 @@ export const firstStepValition = (value: any): boolean => {
     const hasVehicleType = !!data?.vehicle_type;
     const hasDiscount = !!data?.discount_id;
     const hasPassengerQuantity = !!data?.passenger_quantity;
+    const hasBillOfLanding = !!data?.bill_of_landing;
+    const hasBaggage = !!data?.baggage;
 
     const hasCompletedTypeFillup = () => {
         switch (data?.type_id) {
             case 1: return hasDiscount && hasPassengerQuantity;
             case 2: return hasPlateNumber && hasWeight && hasVehicleType;
-            case 3: return hasDescription && hasItemQuantity && hasItemName && hasWeight;
+            case 3: return hasDescription && hasItemQuantity && hasItemName && hasWeight && hasBillOfLanding && hasBaggage;
             default: return false;
         }
     };
