@@ -10,7 +10,7 @@ export const FillupRoute = ({initialRouteType, handleOnRouteChoose, firstStepIni
     const { value } = useMultiForm() 
     const [routeType, setRouteType] = React.useState<string>(initialRouteType);
     const [routeOpen, setRouteOpen] = React.useState<boolean>(false);
-    const [routeOrigin, setRouteOrigin] = React.useState<string>(value.route.origin || 'San Jose')
+    const [routeOrigin, setRouteOrigin] = React.useState<string>(value?.route?.origin || 'San Jose')
     const handleActiveRouteType= () =>{
         return !routeOpen ? value?.route?.transportation_type : routeType
     }
