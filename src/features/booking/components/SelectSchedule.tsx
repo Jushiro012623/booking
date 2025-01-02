@@ -2,7 +2,7 @@ import React from 'react'
 import { useMultiForm } from '../../../context/MultiStepperProvider'
 import { mock_schedule } from '../../../mock/Data'
 import Typography from '../../../components/ui/Typography'
-import { IoIosArrowRoundForward, IoIosArrowDown } from 'react-icons/io'
+import { IoIosArrowRoundForward } from 'react-icons/io'
 import { ViewSelectedSchedule } from './ViewSelectedSchedule'
 import Button from '../../../components/ui/Button'
 import { isSelected } from '../../../utils/MultiForm'
@@ -28,10 +28,10 @@ const ScheduleList = ({ value, vesselType, currentSelectedSchedule , setSelected
         <div className="flex h-full gap-x-3 flex-col items-end justify-center ml-auto">
             <Typography variant="body1" color='primary' className="!font-bold ">{schedule.fare}</Typography>
             {schedule.available_slots < 10 && 
-            <Typography variant="info" className="text-yellow-500 font-semibold">{schedule.available_slots} Slots left in this schedule</Typography>
+                <Typography variant="info" className="text-yellow-500 font-semibold">{schedule.available_slots} Slots left in this schedule</Typography>
             }
         </div>
-        <Button size="small" variant={`border`} className={`ml-5 h-10 ${currentSelectedSchedule(schedule) ? 'bg-cerulean-blue-500 text-white hover:text-white hover:bg-cerulean-blue-600/90' : ''}`} onClick={()=>{setViewFLight(true); setSelectedSchedule(schedule)}} >{currentSelectedSchedule(schedule) ? 'Selected' : 'Select'}</Button>
+        <Button size="small" variant={`border`} className={`ml-5 h-10 ${currentSelectedSchedule(schedule) ? 'bg-cerulean-blue-500 text-white hover:text-white hover:bg-cerulean-blue-600' : ''}`} onClick={()=>{setViewFLight(true); setSelectedSchedule(schedule)}} >{currentSelectedSchedule(schedule) ? 'Selected' : 'Select'}</Button>
     </div>))
 }
 export const SelectSchedule = () => {

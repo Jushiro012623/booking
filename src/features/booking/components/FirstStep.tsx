@@ -44,9 +44,7 @@ const FirstStep = ({routes}:any) => {
                     </div>
                     <Typography variant="small">is Required </Typography>
                 </div>
-
                 {/* -----------------------------------ROUTES FIELD----------------------------------- */}
-                
                 <Typography variant="body2" className='mt-6 font-medium'>Route information</Typography>
                 <FillupRoute routes={routes} initialRouteType={initialRouteType} handleOnRouteChoose={handleOnRouteChoose} firstStepInitData={firstStepInitData}/>
                 <span className='block border-b-2 border-dotted  h-1 mt-7' />

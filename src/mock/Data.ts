@@ -1,3 +1,21 @@
+export const origins = [
+    {
+        id: 1,
+        name: 'San Jose'
+    },
+    {
+        id: 2,
+        name: 'Semirara'
+    },
+    {
+        id: 3,
+        name: 'Caluya'
+    },
+    {
+        id: 4,
+        name: 'Libertad'
+    },
+]
 export const mock_routes = [
     {
       id: 1,
@@ -19,22 +37,46 @@ export const mock_routes = [
     },
     {
       id: 4,
-      origin: "Caluya",
-      destination: "Libertad",
-      transportation_type: "in"
+      origin: "Semirara",
+      destination: "Caluya",
+      transportation_type: "out"
     },
     {
       id: 5,
       origin: "Semirara",
+      destination: "Libertad",
+      transportation_type: "out"
+    },
+    {
+      id: 6,
+      origin: "Caluya",
+      destination: "Libertad",
+      transportation_type: "out"
+    },
+    {
+      id: 7,
+      origin: "Libertad",
       destination: "Caluya",
       transportation_type: "in"
     },
     {
-      id: 6,
-      origin: "Semirara",
-      destination: "Libertad",
+      id: 8,
+      origin: "Libertad",
+      destination: "Semirara",
       transportation_type: "in"
-    }
+    },
+    {
+      id: 9,
+      origin: "Caluya",
+      destination: "Semirara",
+      transportation_type: "in"
+    },
+    {
+      id: 10,
+      origin: "Semirara",
+      destination: "San Jose",
+      transportation_type: "in"
+    },
 ]
 
 export const mock_shipment_type  = [

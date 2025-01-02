@@ -5,13 +5,17 @@ import { isSelected } from '../../../utils/MultiForm'
 import Typography from '../../../components/ui/Typography'
 import { useMultiForm } from '../../../context/MultiStepperProvider'
 import isRequired from '../../../assets/icon-required.svg'
+import {origins} from '../../../mock/Data'
 export const FillupRoute = ({initialRouteType, handleOnRouteChoose, firstStepInitData,routes} : any) => {
     const { value } = useMultiForm() 
     const [routeType, setRouteType] = React.useState<string>(initialRouteType);
     const [routeOpen, setRouteOpen] = React.useState<boolean>(false);
+    const [routeOrigin, setRouteOrigin] = React.useState<string>(value.route.origin || 'San Jose')
     const handleActiveRouteType= () =>{
         return !routeOpen ? value?.route?.transportation_type : routeType
     }
+    console.log(value);
+    
   return (
     <React.Fragment>
         <div className={``}>
@@ -52,24 +56,50 @@ export const FillupRoute = ({initialRouteType, handleOnRouteChoose, firstStepIni
                     </div>
                 </div>
             </div>
-            <div className={`overflow-hidden transition-all px-1 duration-300 ${routeOpen ? 'h-[182px]' : 'h-0'}`}>
-                { routeOpen && routes
-                .filter((route: any) => route.transportation_type === routeType)
-                .map((route : any) => ( <Typography variant='label'
-                    key={route?.id}
-                    className={`w-full hover:shadow-md border border-neutral-300 h-12 px-5 mt-3 rounded-md cursor-pointer flex items-center gap-10 animate-appear transition-colors duration-300 ${isSelected(route?.id, firstStepInitData?.id || value?.route?.id)}`}>
-                        <input
-                        type="radio"
-                        name="route"
-                        value={route.id}
-                        className="hidden"
-                        onChange={handleOnRouteChoose}
-                        />
-                        <Typography variant="info" className={`relative uppercase font-medium tracking-wide w-full justify-between px-10 flex items-center gap-x-3`}>
-                            {route?.origin} <IoIosArrowRoundForward size={20} className="text-primary absolute top-1/2 left-1/2 -translate-x-1/2  -translate-y-1/2" /> {route?.destination}
+            <div className={`overflow-hidden transition-all duration-300 ${routeOpen ? 'auto' : 'h-0'}`}>
+                <div className='mt-3 flex gap-3'>
+                {origins.map((origin) => (
+                    <Button 
+                        key={origin.name}
+                        variant="plain"
+                        type="button"
+                        className={`border-neutral-300 w-24 h-11 transition-colors duration-300 hover:shadow-md ${isSelected(routeOrigin || value?.route?.origin ,origin.name)}` }
+                        onClick={() => setRouteOrigin(origin.name)}>
+                    {origin.name}</Button>
+                ))}
+                </div>
+                {routeOpen && 
+                    (routes.filter((route: any) => route.transportation_type === routeType && route.origin === routeOrigin).length === 0 ? (
+                        <div className='mt-3 text-sm text-center border py-3 rounded-md'>No Routes Available</div>
+                    ) : (
+                    routes
+                    .filter((route: any) => route.transportation_type === routeType && route.origin === routeOrigin)
+                    .map((route: any) => (
+                        <Typography
+                            variant="label"
+                            key={route?.id}
+                            className={`w-full hover:shadow-md border border-neutral-300 h-12 px-5 mt-3 rounded-md cursor-pointer flex items-center gap-10 animate-appear transition-colors duration-300 ${isSelected(route?.id, firstStepInitData?.id || value?.route?.id)}`}>
+                            <input
+                                type="radio"
+                                name="route"
+                                value={route.id}
+                                className="hidden"
+                                onChange={handleOnRouteChoose}
+                            />
+                            <Typography
+                                variant="info"
+                                className="relative uppercase font-medium tracking-wide w-full justify-between px-10 flex items-center gap-x-3">
+                                {route?.origin}
+                                <IoIosArrowRoundForward
+                                    size={20}
+                                    className="text-primary absolute top-1/2 left-1/2 -translate-x-1/2  -translate-y-1/2"
+                                />
+                                {route?.destination}
+                            </Typography>
                         </Typography>
-                </Typography>)
-                )}
+                    ))
+                ))}
+
             </div>
         </div>
     </React.Fragment>
